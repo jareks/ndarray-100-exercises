@@ -1,0 +1,7 @@
+[package]
+name = "ndarray100"
+version = "0.1.0"
+authors = ["Jaroslaw Skrzypek <skrzypek.jarek@gmail.com>"]
+
+[dependencies]
+ndarray = "0.7.2"
