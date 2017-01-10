@@ -3,6 +3,9 @@ extern crate ndarray;
 extern crate ndarray_rand;
 extern crate rand;
 
+#[macro_use]
+extern crate approx;
+
 use ndarray::*;
 use ndarray_rand::RandomExt;
 
@@ -122,4 +125,12 @@ fn exercise13() {
     assert!(min < max);
 }
 
+// 14. Create a random vector of size 30 and find the mean value (★☆☆)
+#[test]
+fn exercise14() {
+    let arr: Array1<f64> = Array::random((30), rand::distributions::normal::Normal::new(0.0, 10.0));
+    let mean = arr.iter().fold(0.0, |a, x| a + x / arr.len() as f64);
+    let sum: f64 = arr.iter().sum();
+    relative_eq!(mean, sum / 30.0);
+}
 
