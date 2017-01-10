@@ -134,3 +134,18 @@ fn exercise14() {
     relative_eq!(mean, sum / 30.0);
 }
 
+
+// 15. Create a 10x10 array with 1 on the border and 0 inside (★☆☆)
+#[test]
+fn exercise15() {
+    let mut arr: Array2<f64> = Array::from_elem((10,10), 1.0);
+    { // fighting "borrowing checker"
+        let mut inner = arr.slice_mut(s!(1..-1, 1..-1));
+        inner.fill(0.0);
+    }
+    assert_eq!(arr[(0,0)], 1.0);
+    assert_eq!(arr[(1,1)], 0.0);
+    assert_eq!(arr[(9,9)], 1.0);
+}
+
+
