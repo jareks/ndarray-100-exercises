@@ -148,4 +148,35 @@ fn exercise15() {
     assert_eq!(arr[(9,9)], 1.0);
 }
 
+// 16. add a border (filled with 0's) around an existing array? (★☆☆)
+#[test]
+fn exercise16() {
+    let original: Array2<f64> = Array::zeros((2,2));
+    let mut padded: Array2<f64> = Array::from_elem((original.rows()+2, original.cols()+2), 2.0);
+    padded.slice_mut(s!(1..-1, 1..-1)).assign(&original);
+
+    assert_eq!(padded, arr2(&[[2.0, 2.0, 2.0, 2.0],
+                              [2.0, 0.0, 0.0, 2.0],
+                              [2.0, 0.0, 0.0, 2.0],
+                              [2.0, 2.0, 2.0, 2.0]]));
+}
+
+// 18. Create a 5x5 matrix with values 1,2,3,4 just below the diagonal (★☆☆)
+#[test]
+fn exercise18() {
+    let mut arr = Array::eye(5);
+    let mut nums = vec!(1.0, 2.0, 3.0, 4.0);
+
+    for ((x, y), v) in arr.indexed_iter_mut() {
+        if x == y + 1 {
+            *v = nums.remove(0);
+        }
+    }
+
+    assert_eq!(arr, arr2(&[[1.0, 0.0, 0.0, 0.0, 0.0],
+                           [1.0, 1.0, 0.0, 0.0, 0.0],
+                           [0.0, 2.0, 1.0, 0.0, 0.0],
+                           [0.0, 0.0, 3.0, 1.0, 0.0],
+                           [0.0, 0.0, 0.0, 4.0, 1.0]]));
+}
 
