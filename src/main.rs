@@ -131,7 +131,7 @@ fn exercise14() {
     let arr: Array1<f64> = Array::random((30), rand::distributions::normal::Normal::new(0.0, 10.0));
     let mean = arr.iter().fold(0.0, |a, x| a + x / arr.len() as f64);
     let sum: f64 = arr.iter().sum();
-    relative_eq!(mean, sum / 30.0);
+    assert_relative_eq!(mean, sum / 30.0, max_relative = 0.01);
 }
 
 
